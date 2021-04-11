@@ -5,10 +5,11 @@ import { fakeSubmitForm } from './service';
 export interface StateType {
   current?: string;
   step?: {
-    payAccount: string;
-    receiverAccount: string;
-    receiverName: string;
-    amount: string;
+    selected: number;
+    addr: string;
+    bandwidth: number;
+    burst: number;
+    guaranteed: boolean;
   };
 }
 
@@ -30,10 +31,11 @@ const Model: ModelType = {
   state: {
     current: 'info',
     step: {
-      payAccount: 'ant-design@alipay.com',
-      receiverAccount: 'test@example.com',
-      receiverName: 'Alex',
-      amount: '500',
+      selected: 0,
+      addr: '0x0671a40872727Ff3c610DD287e88c5b3672A6b30',
+      bandwidth: 512,
+      burst: 50,
+      guaranteed: true
     },
   },
 

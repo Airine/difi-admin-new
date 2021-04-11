@@ -98,12 +98,12 @@ export default defineConfig({
                   path: '/form/basic-form',
                   component: './form/basic-form',
                 },
-                // {
-                //   name: 'Experiment',
-                //   icon: 'smile',
-                //   path: '/form/advanced-form',
-                //   component: './form/advanced-form',
-                // },
+                {
+                  name: 'Avanced Request',
+                  icon: 'smile',
+                  path: '/form/advanced-form',
+                  component: './form/advanced-form',
+                },
               ],
             },
             {

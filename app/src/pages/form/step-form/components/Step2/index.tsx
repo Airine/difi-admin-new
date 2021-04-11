@@ -1,9 +1,11 @@
-import React from 'react';
-import { Form, Alert, Button, Descriptions, Divider, Statistic, Input } from 'antd';
+import React, { useState } from 'react';
+import { Form, Card, List, Button, Descriptions, Divider, Statistic, Input, Row, Col } from 'antd';
 import type { Dispatch } from 'umi';
 import { connect } from 'umi';
 import type { StateType } from '../../model';
 import styles from './index.less';
+import center from '@/pages/account/center';
+import { Guide } from 'bizcharts';
 
 const formItemLayout = {
   labelCol: {
@@ -13,6 +15,18 @@ const formItemLayout = {
     span: 19,
   },
 };
+
+const modes = [
+  {
+    id: 0,
+    name: 'Guaranteed',
+  },
+  {
+    id: 1,
+    name: 'Standard',
+  }
+]
+
 interface Step2Props {
   data?: StateType['step'];
   dispatch?: Dispatch;
@@ -22,6 +36,11 @@ interface Step2Props {
 const Step2: React.FC<Step2Props> = (props) => {
   const [form] = Form.useForm();
   const { data, dispatch, submitting } = props;
+
+  const v = data?.guaranteed ? 0 : 1;
+
+  const [gaurunteed, setGaurunteed] = useState(v);
+
   if (!data) {
     return null;
   }
@@ -55,33 +74,82 @@ const Step2: React.FC<Step2Props> = (props) => {
     }
   };
 
-  const { payAccount, receiverAccount, receiverName, amount } = data;
+  const { addr, bandwidth, burst } = data;
   return (
     <Form
       {...formItemLayout}
       form={form}
       layout="horizontal"
       className={styles.stepForm}
-      initialValues={{ password: '123456' }}
+      initialValues={{ privateKey: '0x8f517cca15c489177c4daa5faf12fc59338895f6e47a9a7448c60623f5687c9b' }}
     >
-      <Alert
-        closable
-        showIcon
-        message="确认转账后，资金将直接打入对方账户，无法退回。"
-        style={{ marginBottom: 24 }}
-      />
       <Descriptions column={1}>
-        <Descriptions.Item label="付款账户"> {payAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款账户"> {receiverAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款人姓名"> {receiverName}</Descriptions.Item>
-        <Descriptions.Item label="转账金额">
-          <Statistic value={amount} suffix="元" />
+        <Descriptions.Item label="Address"> {addr} </Descriptions.Item>
+        <Descriptions.Item label="Bandwidth">
+          {bandwidth > 1024 ?
+            <p>{bandwidth/1024} Mbps</p> :
+            <p>{bandwidth} Kbps</p>}
         </Descriptions.Item>
+        <Descriptions.Item label="Burst">
+          {burst > 1024 ?
+          <p>{burst/1024} MB</p> :
+          <p>{burst} KB</p>}
+        </Descriptions.Item>
+        {/* <Descriptions.Item label="转账金额">
+          <Statistic value={amount} suffix="元" />
+        </Descriptions.Item> */}
       </Descriptions>
+      <Form.Item>
+        <List
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 1,
+            md: 1,
+            lg: 1,
+            xl: 1,
+            xxl: 1,
+          }}
+          dataSource={modes}
+          renderItem={(item)=>{
+            console.log(item.id);
+            console.log(gaurunteed);
+            return (
+              <List.Item key={item.id}>
+                <Card 
+                  className={item?.id == gaurunteed ? styles.selected : styles.unselected }
+                  onClick={
+                    ()=>{
+                      data.guaranteed = item.id == 0
+                      setGaurunteed(item.id);
+                    }
+                  }
+                  hoverable>
+                  <Row gutter={16} justify="space-around" align="middle">
+                    <Col className="gutter-row" span={7}>
+                      <h2>{item.name}</h2>
+                    </Col>
+                    <Col span={2}/>
+                    <Col className="gutter-row" span={15}>
+                      <p>Need to pay approximately:</p>
+                      <p><b>1.56</b> per second</p>
+                      {item.id == 0 ?
+                      <p>Guaranteed to receive in full:</p>:
+                      <p>Receive approximately:</p>
+                      }
+                      <p><b>{(data.bandwidth/1024).toFixed(2)}</b> Mbps + <b>{(data.burst/1024).toFixed(2)}</b> MB burst</p>
+                    </Col>
+                  </Row>
+                </Card>
+              </List.Item>
+            );
+          }}
+        />
+      </Form.Item>
       <Divider style={{ margin: '24px 0' }} />
       <Form.Item
-        label="支付密码"
-        name="password"
+        label="Private Key"
+        name="privateKey"
         required={false}
         rules={[{ required: true, message: '需要支付密码才能进行支付' }]}
       >
