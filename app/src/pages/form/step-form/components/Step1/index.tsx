@@ -1,24 +1,56 @@
 import React from 'react';
-import { Form, Button, Divider, Input, Select } from 'antd';
+import { Form, List, Divider, Card, Typography } from 'antd';
 import type { Dispatch } from 'umi';
 import { connect } from 'umi';
 import type { StateType } from '../../model';
 import styles from './index.less';
 
-const { Option } = Select;
+const { Title } = Typography;
 
-const formItemLayout = {
-  labelCol: {
-    span: 5,
-  },
-  wrapperCol: {
-    span: 19,
-  },
-};
+// import { Item } from 'gg-editor';
+
+// const { Option } = Select;
+
+// const formItemLayout = {
+//   labelCol: {
+//     span: 5,
+//   },
+//   wrapperCol: {
+//     span: 19,
+//   },
+// };
 interface Step1Props {
   data?: StateType['step'];
   dispatch?: Dispatch;
 }
+
+const options = [
+  {
+    id: 0,
+    title: "Basic (Free)",
+    description: "512 Kbps + 50 KB burst"
+  },
+  {
+    id: 1,
+    title: "Standard Videos",
+    description: "2 Mbps + 2 MB burst"
+  },
+  {
+    id: 2,
+    title: "HD Videos",
+    description: "4 Mbps + 4 MB burst"
+  },
+  {
+    id: 3,
+    title: "Web Surfing",
+    description: "2 Mbps + 512 KB burst"
+  },
+  {
+    id: 4,
+    title: "File Transfer",
+    description: "10 Mbps + 1 MB burst"
+  },
+]
 
 const Step1: React.FC<Step1Props> = (props) => {
   const { dispatch, data } = props;
@@ -43,75 +75,29 @@ const Step1: React.FC<Step1Props> = (props) => {
   };
   return (
     <>
-      <Form
-        {...formItemLayout}
-        form={form}
-        layout="horizontal"
-        className={styles.stepForm}
-        hideRequiredMark
-        initialValues={data}
-      >
-        <Form.Item
-          label="付款账户"
-          name="payAccount"
-          rules={[{ required: true, message: '请选择付款账户' }]}
-        >
-          <Select placeholder="test@example.com">
-            <Option value="ant-design@alipay.com">ant-design@alipay.com</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="收款账户">
-          <Input.Group compact>
-            <Select defaultValue="alipay" style={{ width: 100 }}>
-              <Option value="alipay">支付宝</Option>
-              <Option value="bank">银行账户</Option>
-            </Select>
-            <Form.Item
-              noStyle
-              name="receiverAccount"
-              rules={[
-                { required: true, message: '请输入收款人账户' },
-                { type: 'email', message: '账户名应为邮箱格式' },
-              ]}
+      {/* <Card></Card> */}
+      <List
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 2,
+          md: 2,
+          lg: 3,
+          xl: 3,
+          xxl: 3,
+        }}
+        dataSource={options}
+        renderItem={item => (
+          <List.Item key={item.id}>
+            <Card
+              hoverable
             >
-              <Input style={{ width: 'calc(100% - 100px)' }} placeholder="test@example.com" />
-            </Form.Item>
-          </Input.Group>
-        </Form.Item>
-        <Form.Item
-          label="收款人姓名"
-          name="receiverName"
-          rules={[{ required: true, message: '请输入收款人姓名' }]}
-        >
-          <Input placeholder="请输入收款人姓名" />
-        </Form.Item>
-        <Form.Item
-          label="转账金额"
-          name="amount"
-          rules={[
-            { required: true, message: '请输入转账金额' },
-            {
-              pattern: /^(\d+)((?:\.\d+)?)$/,
-              message: '请输入合法金额数字',
-            },
-          ]}
-        >
-          <Input prefix="￥" placeholder="请输入金额" />
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            xs: { span: 24, offset: 0 },
-            sm: {
-              span: formItemLayout.wrapperCol.span,
-              offset: formItemLayout.labelCol.span,
-            },
-          }}
-        >
-          <Button type="primary" onClick={onValidateForm}>
-            下一步
-          </Button>
-        </Form.Item>
-      </Form>
+              <Title level={4}>{item.title}</Title>
+              {item.description}
+            </Card>
+          </List.Item>
+        )}
+      />
       <Divider style={{ margin: '40px 0 24px' }} />
       <div className={styles.desc}>
         <h3>说明</h3>

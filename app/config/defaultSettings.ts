@@ -10,10 +10,12 @@ const proSettings: DefaultSettings = {  // 拂晓蓝
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
-  colorWeak: true,
+  colorWeak: false,
   title: 'DiFi',
   pwa: false,
   iconfontUrl: '',
+  navTheme: 'light',
+  headerTheme: 'light',
 };
 
 export type { DefaultSettings };

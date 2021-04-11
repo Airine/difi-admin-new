@@ -35,9 +35,15 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-descriptions": "^1.2.0",
@@ -48,6 +54,7 @@
     "@antv/l7": "^2.1.9",
     "@antv/l7-maps": "^2.1.9",
     "@antv/l7-react": "^2.1.9",
+    "@drizzle/react-plugin": "^1.5.3",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.isequal": "^4.5.5",
     "@umijs/route-utils": "^1.0.33",
@@ -55,6 +62,7 @@
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",
+    "drizzle-react-components": "^1.4.0",
     "dva": "^2.4.0",
     "gg-editor": "^2.0.2",
     "lodash": "^4.17.11",
@@ -109,7 +117,9 @@
     "stylelint": "^13.0.0",
     "typescript": "^4.0.3"
   },
-  "engines": { "node": ">=10.0.0" },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "checkFiles": [
     "src/**/*.js*",
     "src/**/*.ts*",

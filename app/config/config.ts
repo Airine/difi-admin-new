@@ -75,61 +75,118 @@ export default defineConfig({
               path: '/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
-              component: './dashboard/monitor'
-              // routes: [
-              //   {
-              //     path: '/',
-              //     redirect: '/dashboard',
-              //   },
-              //   {
-              //     name: 'analysis',
-              //     icon: 'smile',
-              //     path: '/dashboard/analysis',
-              //     component: './dashboard/analysis',
-              //   },
-              //   {
-              //     name: 'monitor',
-              //     icon: 'smile',
-              //     path: '/dashboard/monitor',
-              //     component: './dashboard/monitor',
-              //   },
-              //   {
-              //     name: 'workplace',
-              //     icon: 'smile',
-              //     path: '/dashboard/workplace',
-              //     component: './dashboard/workplace',
-              //   },
-              // ],
+              component: './dashboard'
             },
             {
               path: '/form',
               icon: 'form',
-              name: 'form',
+              name: 'Requests',
               routes: [
                 {
                   path: '/',
-                  redirect: '/form/basic-form',
+                  redirect: '/form/step-form',
                 },
                 {
-                  name: 'basic-form',
-                  icon: 'smile',
-                  path: '/form/basic-form',
-                  component: './form/basic-form',
-                },
-                {
-                  name: 'step-form',
+                  name: 'Bandwidth Request',
                   icon: 'smile',
                   path: '/form/step-form',
                   component: './form/step-form',
                 },
                 {
-                  name: 'advanced-form',
+                  name: 'Top-up Balance',
                   icon: 'smile',
-                  path: '/form/advanced-form',
-                  component: './form/advanced-form',
+                  path: '/form/basic-form',
+                  component: './form/basic-form',
                 },
+                // {
+                //   name: 'Experiment',
+                //   icon: 'smile',
+                //   path: '/form/advanced-form',
+                //   component: './form/advanced-form',
+                // },
               ],
             },
+            {
+              path: '/info',
+              name: 'Allocation Result',
+              icon: 'CheckCircleOutlined',
+              component: './info'
+            },
+            // {
+            //   name: 'result',
+            //   icon: 'CheckCircleOutlined',
+            //   path: '/result',
+            //   routes: [
+            //     {
+            //       path: '/',
+            //       redirect: '/result/success',
+            //     },
+            //     {
+            //       name: 'success',
+            //       icon: 'smile',
+            //       path: '/result/success',
+            //       component: './result/success',
+            //     },
+            //     {
+            //       name: 'fail',
+            //       icon: 'smile',
+            //       path: '/result/fail',
+            //       component: './result/fail',
+            //     },
+            //   ],
+            // },
+            // {
+            //   name: 'exception',
+            //   icon: 'warning',
+            //   path: '/exception',
+            //   routes: [
+            //     {
+            //       path: '/',
+            //       redirect: '/exception/403',
+            //     },
+            //     {
+            //       name: '403',
+            //       icon: 'smile',
+            //       path: '/exception/403',
+            //       component: './exception/403',
+            //     },
+            //     {
+            //       name: '404',
+            //       icon: 'smile',
+            //       path: '/exception/404',
+            //       component: './exception/404',
+            //     },
+            //     {
+            //       name: '500',
+            //       icon: 'smile',
+            //       path: '/exception/500',
+            //       component: './exception/500',
+            //     },
+            //   ],
+            // },
+            // {
+            //   name: 'account',
+            //   icon: 'user',
+            //   path: '/account',
+            //   routes: [
+            //     {
+            //       path: '/',
+            //       redirect: '/account/center',
+            //     },
+            //     {
+            //       name: 'center',
+            //       icon: 'smile',
+            //       path: '/account/center',
+            //       component: './account/center',
+            //     },
+            //     {
+            //       name: 'settings',
+            //       icon: 'smile',
+            //       path: '/account/settings',
+            //       component: './account/settings',
+            //     },
+            //   ],
+            // },
             {
               path: '/list',
               icon: 'table',
@@ -185,133 +242,6 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/list/card-list',
                   component: './list/card-list',
-                },
-              ],
-            },
-            {
-              path: '/profile',
-              name: 'profile',
-              icon: 'profile',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/profile/basic',
-                },
-                {
-                  name: 'basic',
-                  icon: 'smile',
-                  path: '/profile/basic',
-                  component: './profile/basic',
-                },
-                {
-                  name: 'advanced',
-                  icon: 'smile',
-                  path: '/profile/advanced',
-                  component: './profile/advanced',
-                },
-              ],
-            },
-            {
-              name: 'result',
-              icon: 'CheckCircleOutlined',
-              path: '/result',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/result/success',
-                },
-                {
-                  name: 'success',
-                  icon: 'smile',
-                  path: '/result/success',
-                  component: './result/success',
-                },
-                {
-                  name: 'fail',
-                  icon: 'smile',
-                  path: '/result/fail',
-                  component: './result/fail',
-                },
-              ],
-            },
-            {
-              name: 'exception',
-              icon: 'warning',
-              path: '/exception',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/exception/403',
-                },
-                {
-                  name: '403',
-                  icon: 'smile',
-                  path: '/exception/403',
-                  component: './exception/403',
-                },
-                {
-                  name: '404',
-                  icon: 'smile',
-                  path: '/exception/404',
-                  component: './exception/404',
-                },
-                {
-                  name: '500',
-                  icon: 'smile',
-                  path: '/exception/500',
-                  component: './exception/500',
-                },
-              ],
-            },
-            {
-              name: 'account',
-              icon: 'user',
-              path: '/account',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/account/center',
-                },
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: 'settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
-              ],
-            },
-            {
-              name: 'editor',
-              icon: 'highlight',
-              path: '/editor',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/editor/flow',
-                },
-                {
-                  name: 'flow',
-                  icon: 'smile',
-                  path: '/editor/flow',
-                  component: './editor/flow',
-                },
-                {
-                  name: 'mind',
-                  icon: 'smile',
-                  path: '/editor/mind',
-                  component: './editor/mind',
-                },
-                {
-                  name: 'koni',
-                  icon: 'smile',
-                  path: '/editor/koni',
-                  component: './editor/koni',
                 },
               ],
             },
