@@ -88,3 +88,20 @@
   }
   color: @text-color-secondary;
 }
+
+.information {
+  line-height: 22px;
+  :global {
+    .ant-row:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+  .label {
+    padding-right: 8px;
+    color: @heading-color;
+    text-align: right;
+    @media screen and (max-width: @screen-sm) {
+      text-align: left;
+    }
+  }
+}

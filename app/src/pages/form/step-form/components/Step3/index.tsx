@@ -1,7 +1,7 @@
-import { Button, Result, Descriptions, Statistic } from 'antd';
+import { Button, Result, Descriptions } from 'antd';
 import React from 'react';
 import type { Dispatch } from 'umi';
-import { connect } from 'umi';
+import { history, connect } from 'umi';
 import type { StateType } from '../../model';
 import styles from './index.less';
 
@@ -15,7 +15,7 @@ const Step3: React.FC<Step3Props> = (props) => {
   if (!data) {
     return null;
   }
-  const { payAccount, receiverAccount, receiverName, amount } = data;
+  const { bandwidth, burst } = data;
   const onFinish = () => {
     if (dispatch) {
       dispatch({
@@ -27,11 +27,15 @@ const Step3: React.FC<Step3Props> = (props) => {
   const information = (
     <div className={styles.information}>
       <Descriptions column={1}>
-        <Descriptions.Item label="付款账户"> {payAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款账户"> {receiverAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款人姓名"> {receiverName}</Descriptions.Item>
-        <Descriptions.Item label="转账金额">
-          <Statistic value={amount} suffix="元" />
+      <Descriptions.Item label="Allocated Bandwidth">
+          {bandwidth > 1024 ?
+            <p>{bandwidth/1024} Mbps</p> :
+            <p>{bandwidth} Kbps</p>}
+        </Descriptions.Item>
+        <Descriptions.Item label="Burst Data">
+          {burst > 1024 ?
+          <p>{burst/1024} MB</p> :
+          <p>{burst} KB</p>}
         </Descriptions.Item>
       </Descriptions>
     </div>
@@ -39,16 +43,18 @@ const Step3: React.FC<Step3Props> = (props) => {
   const extra = (
     <>
       <Button type="primary" onClick={onFinish}>
-        再转一笔
+        New Request
       </Button>
-      <Button>查看账单</Button>
+      <Button onClick={()=>{
+        history.push(`/dashboard`)
+      }}>View Allocation</Button>
     </>
   );
   return (
     <Result
       status="success"
-      title="操作成功"
-      subTitle="预计两小时内到账"
+      title="Request Successfully"
+      subTitle="Please wait a little bit and validate the bandwidth"
       extra={extra}
       className={styles.result}
     >

@@ -64,7 +64,7 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
       const newNotice = { ...notice };
 
       if (newNotice.datetime) {
-        newNotice.datetime = moment(notice.datetime as string).fromNow();
+        newNotice.datetime = moment(notice.datetime as string, 'YYYY-MM-DDThh:mm:ss').fromNow();
       }
 
       if (newNotice.id) {
@@ -146,14 +146,14 @@ class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
           emptyText="您已读完所有消息"
           showViewMore
         />
-        <NoticeIcon.Tab
+        {/* <NoticeIcon.Tab
           tabKey="event"
           title="待办"
           emptyText="你已完成所有待办"
           count={unreadMsg.event}
           list={noticeData.event}
           showViewMore
-        />
+        /> */}
       </NoticeIcon>
     );
   }

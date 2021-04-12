@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Card, List, Button, Descriptions, Divider, Statistic, Input, Row, Col } from 'antd';
+import { Form, Card, List, Button, Descriptions, Divider, Input, Row, Col } from 'antd';
 import type { Dispatch } from 'umi';
 import { connect } from 'umi';
 import type { StateType } from '../../model';
 import styles from './index.less';
-import center from '@/pages/account/center';
-import { Guide } from 'bizcharts';
 
 const formItemLayout = {
   labelCol: {
@@ -83,6 +81,7 @@ const Step2: React.FC<Step2Props> = (props) => {
       className={styles.stepForm}
       initialValues={{ privateKey: '0x8f517cca15c489177c4daa5faf12fc59338895f6e47a9a7448c60623f5687c9b' }}
     >
+      <div className={styles.information}>
       <Descriptions column={1}>
         <Descriptions.Item label="Address"> {addr} </Descriptions.Item>
         <Descriptions.Item label="Bandwidth">
@@ -99,6 +98,7 @@ const Step2: React.FC<Step2Props> = (props) => {
           <Statistic value={amount} suffix="元" />
         </Descriptions.Item> */}
       </Descriptions>
+      </div>
       <Form.Item>
         <List
           grid={{
