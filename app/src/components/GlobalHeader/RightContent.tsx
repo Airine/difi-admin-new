@@ -1,12 +1,10 @@
-import { Tooltip, Tag } from 'antd';
+import { Tag } from 'antd';
 import type { Settings as ProSettings } from '@ant-design/pro-layout';
-import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import type { ConnectProps } from 'umi';
-import { connect, SelectLang } from 'umi';
+import { connect } from 'umi';
 import type { ConnectState } from '@/models/connect';
 import Avatar from './AvatarDropdown';
-import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
 

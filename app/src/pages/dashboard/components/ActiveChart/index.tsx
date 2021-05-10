@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import { Statistic } from 'antd';
 import { MiniArea } from '../Charts';
 import styles from './index.less';
 
@@ -8,13 +6,33 @@ function fixedZero(val: number) {
   return val * 1 < 10 ? `0${val}` : val;
 }
 
+const activeData: { x: string; y: number; }[] = [];
+
 function getActiveData() {
-  const activeData = [];
-  for (let i = 0; i < 24; i += 1) {
-    activeData.push({
-      x: `${fixedZero(i)}:00`,
-      y: Math.floor(Math.random() * 200) + i * 50,
-    });
+  if (activeData.length == 0) {
+    const now = new Date();
+    var time = new Date(now.getTime() - 1 * 60000);
+    while (time < now) {
+      var time = new Date(time.getTime() + 1000);
+      activeData.push({
+        x: `${fixedZero(time.getHours())}:${fixedZero(time.getMinutes())}:${fixedZero(time.getSeconds())}`,
+        y: Math.floor(Math.random() * 50) + 50,
+      });
+    }
+  } else {
+    var time = new Date();
+    const [hours, mins, seconds] = activeData[activeData.length-1].x.split(':');
+    time.setHours(parseInt(hours));
+    time.setMinutes(parseInt(mins));
+    time.setSeconds(parseInt(seconds));
+    const now = new Date();
+    while (time < now) {
+      time = new Date(time.getTime() + 1000);
+      activeData.shift();
+      activeData.push({
+        x: `${fixedZero(time.getHours())}:${fixedZero(time.getMinutes())}:${fixedZero(time.getSeconds())}`,        y: Math.floor(Math.random() * 50) + 50,
+      });
+    }
   }
   return activeData;
 }
@@ -59,7 +77,7 @@ export default class ActiveChart extends Component {
 
     return (
       <div className={styles.activeChart}>
-        <Statistic title="目标评估" value="有望达到预期" />
+        {/* <Statistic title="目标评估" value="有望达到预期" /> */}
         <div style={{ marginTop: 32 }}>
           <MiniArea
             animate={false}
@@ -81,22 +99,8 @@ export default class ActiveChart extends Component {
           />
         </div>
         {activeData && (
-          <div>
-            <div className={styles.activeChartGrid}>
-              <p>{[...activeData].sort()[activeData.length - 1].y + 200} 亿元</p>
-              <p>{[...activeData].sort()[Math.floor(activeData.length / 2)].y} 亿元</p>
-            </div>
-            <div className={styles.dashedLine}>
-              <div className={styles.line} />
-            </div>
-            <div className={styles.dashedLine}>
-              <div className={styles.line} />
-            </div>
-          </div>
-        )}
-        {activeData && (
           <div className={styles.activeChartLegend}>
-            <span>00:00</span>
+            <span>{activeData[0].x}</span>
             <span>{activeData[Math.floor(activeData.length / 2)].x}</span>
             <span>{activeData[activeData.length - 1].x}</span>
           </div>
